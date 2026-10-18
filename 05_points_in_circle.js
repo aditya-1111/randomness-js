@@ -1,5 +1,26 @@
 const r = require("raylib");
 
+function getRadian(degree) {
+  return (degree * Math.PI) / 180;
+}
+
+function createRandomPoints(radius, length) {
+
+  const points = [];
+
+  for (let i = 0; i < length; i++) {
+    const pointRadius = Math.floor(Math.random() * radius);
+    const radian = getRadian(Math.floor(Math.random() * 90));
+
+    const x = pointRadius * Math.cos(radian);
+    const y = pointRadius * Math.sin(radian);
+    points.push({ x, y });
+  }
+
+
+  return points;
+}
+
 function setup() {
   const screen = {
     width: 600,
@@ -12,18 +33,21 @@ function setup() {
   const color = {
     r: 254,
     g: 221,
-    b: 69,
-    a: 150
+    b: 79,
+    a: 200
   }
+
+  const length = 200;
+  const pointsArray = createRandomPoints(radius, length);
 
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(screen.width, screen.height, screen.title);
   r.SetTargetFPS(screen.fps);
 
   return {
-    screen,
+    radius,
     color,
-    radius
+    pointsArray
   };
 }
 
@@ -32,16 +56,11 @@ function draw(w) {
 
   r.ClearBackground(r.DARKBLUE);
 
-  r.DrawCircleLines(0, 0, w.radius, r.RED);
+  r.DrawCircleLines(0, 0, w.radius, r.WHITE);
 
-  for (let i = 0; i < 100; i++) {
-    const radiusOfPoint = Math.floor(Math.random() * w.radius);
-    const radian = Math.floor(Math.random() * 360);
-    const x = radiusOfPoint * Math.cos(radian);
-    const y = radiusOfPoint * Math.sin(radian);
-
-    r.DrawCircle(x, y, 4, w.color);
-
+  const points = w.pointsArray;
+  for (let i = 0; i < points.length; i++) {
+    r.DrawCircleV(points[i], 4, w.color);
   }
   r.EndDrawing();
 }
