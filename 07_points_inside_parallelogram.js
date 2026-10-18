@@ -25,7 +25,10 @@ function setup() {
     y: 200
   }
 
-  const width = 160;
+  const v3 = {
+    x: 230,
+    y: 200
+  }
 
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(screen.width, screen.height, screen.title);
@@ -36,13 +39,14 @@ function setup() {
     color,
     v1,
     v2,
-    width,
+    v3,
   };
 }
 
-function drawParallelogram(v1, v2, width, height) {
-  const v3 = { x: v1.x + width, y: v1.y };
-  const v4 = { x: v2.x + width, y: v2.y };
+function drawParallelogram(v1, v2, v3) {
+  const width = v1.x - v2.x;
+  const height = v1.y - v3.y;
+  const v4 = { x: v4 };
 
   r.DrawLineEx(v1, v2, 2, r.WHITE);
   r.DrawLineEx(v1, v3, 2, r.WHITE);
