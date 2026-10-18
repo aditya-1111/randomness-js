@@ -16,20 +16,27 @@ function setup() {
   }
 
   const v1 = {
-    x: 150,
-    y: 100
-  }
-
-  const v2 = {
     x: 100,
     y: 200
   }
 
+  const v2 = {
+    x: 150,
+    y: 100
+  }
+
   const v3 = {
-    x: 230,
+    x: 180,
     y: 200
   }
 
+  const height = Math.abs(v1.y - v2.y);
+  const width = Math.abs(v1.x - v3.x);
+
+  const v4 = {
+
+    y: v2.y
+  }
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(screen.width, screen.height, screen.title);
   r.SetTargetFPS(screen.fps);
@@ -57,9 +64,6 @@ function drawParallelogram(v1, v2, v3) {
 function draw(w) {
   const v1 = w.v1;
   const v2 = w.v2;
-  const height = v1.y - v2.y;
-  const width = w.width;
-
 
   r.BeginDrawing();
 

@@ -79,7 +79,7 @@ function setup() {
     fps: 50,
   }
 
-  const length = 50;
+  const length = 1000;
   const randoms = createRandom(screen.width, screen.height, length);
   const randoms2 = createRandom2(screen.width, screen.height, length);
   const randoms3 = createRandom3(screen.width, screen.height, length);
