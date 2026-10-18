@@ -5,7 +5,6 @@ function getRadian(degree) {
 }
 
 function createRandomPoints(radius, length) {
-
   const points = [];
 
   for (let i = 0; i < length; i++) {
@@ -14,9 +13,9 @@ function createRandomPoints(radius, length) {
 
     const x = pointRadius * Math.cos(radian);
     const y = pointRadius * Math.sin(radian);
+
     points.push({ x, y });
   }
-
 
   return points;
 }
@@ -62,6 +61,7 @@ function draw(w) {
   for (let i = 0; i < points.length; i++) {
     r.DrawCircleV(points[i], 4, w.color);
   }
+
   r.EndDrawing();
 }
 
