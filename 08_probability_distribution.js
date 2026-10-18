@@ -1,11 +1,71 @@
 const r = require("raylib");
 
-function createRandomValue(max, length) {
+function createRandom(width, height, length) {
   const randomArr = [];
   for (let i = 0; i < length; i++) {
-    const num = Math.floor(Math.random() * max);
+    const x = Math.floor(Math.random() * width);
+    const y = Math.floor(Math.random() * height);
 
-    randomArr.push(num);
+    randomArr.push({ x, y });
+  }
+
+  return randomArr;
+}
+
+function createRandom2(width, height, length) {
+  const randomArr = [];
+  for (let i = 0; i < length; i++) {
+    const x = (Math.floor(Math.random() * width) + Math.floor(Math.random() * width)) / 2;
+    const y = (Math.floor(Math.random() * height) + Math.floor(Math.random() * height)) / 2;
+
+    randomArr.push({ x, y });
+  }
+
+  return randomArr;
+}
+
+function createRandom3(width, height, length) {
+  const randomArr = [];
+  for (let i = 0; i < length; i++) {
+    const x =
+      (
+        Math.floor(Math.random() * width)
+        + Math.floor(Math.random() * width)
+        + Math.floor(Math.random() * width)
+      ) / 3;
+    const y =
+      (
+        Math.floor(Math.random() * height)
+        + Math.floor(Math.random() * height)
+        + Math.floor(Math.random() * height)
+      ) / 3;
+
+    randomArr.push({ x, y });
+  }
+
+  return randomArr;
+}
+
+function createRandom4(width, height, length) {
+  const randomArr = [];
+  for (let i = 0; i < length; i++) {
+    const x =
+      (
+        Math.floor(Math.random() * width)
+        // + Math.floor(Math.random() * width)
+        // + Math.floor(Math.random() * width)
+        // + Math.floor(Math.random() * width)
+        // + Math.floor(Math.random() * width)
+        // + Math.floor(Math.random() * width)
+      );
+    const y =
+      (
+        Math.floor(Math.random() * height)
+        + Math.floor(Math.random() * height)
+        + Math.floor(Math.random() * height)
+      ) / 3;
+
+    randomArr.push({ x, y });
   }
 
   return randomArr;
@@ -20,34 +80,49 @@ function setup() {
   }
 
   const length = 50;
-  const xRandomValues = createRandomValue(screen.width, length);
-  const yRandomValues = createRandomValue(screen.height, 50);
+  const randoms = createRandom(screen.width, screen.height, length);
+  const randoms2 = createRandom2(screen.width, screen.height, length);
+  const randoms3 = createRandom3(screen.width, screen.height, length);
+  const randoms4 = createRandom4(screen.width, screen.height, length);
 
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(screen.width, screen.height, screen.title);
   r.SetTargetFPS(screen.fps);
 
   return {
-    xRandomValues,
-    yRandomValues,
-    length
+    randoms,
+    randoms2,
+    randoms3,
+    randoms4,
   };
 }
 
 function draw(w) {
-  const xValues = w.xRandomValues;
-  const yValues = w.yRandomValues;
-  // console.log(xValues, yValues);
+  const values = w.randoms;
+  const values2 = w.randoms2;
+  const values3 = w.randoms3;
+  const values4 = w.randoms4;
 
   r.BeginDrawing();
 
   r.ClearBackground(r.DARKBLUE);
 
-  for (let i = 0; i < w.length; i++) {
-    r.DrawCircle(xValues[i], yValues[i], 3, r.RED);
+  // for (const vec of values) {
+  //   r.DrawCircleV(vec, 6, r.WHITE);
+  // }
+
+  // for (const vec of values2) {
+  //   r.DrawCircleV(vec, 6, r.YELLOW);
+  // }
+
+  // for (const vec of values3) {
+  //   r.DrawCircleV(vec, 6, r.BEIGE);
+  // }
+
+  for (const vec of values4) {
+    r.DrawCircleV(vec, 6, r.ORANGE);
   }
 
-  // console.log(Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6))
   r.EndDrawing();
 }
 
