@@ -43,11 +43,11 @@ function draw(w) {
 
   r.ClearBackground(r.DARKBLUE);
 
-  // for (let i = 0; i < w.length; i++) {
-  //   r.DrawCircle(xValues[i], yValues[i], 3, r.RED);
-  // }
+  for (let i = 0; i < w.length; i++) {
+    r.DrawCircle(xValues[i], yValues[i], 3, r.RED);
+  }
 
-  console.log(Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6))
+  // console.log(Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6))
   r.EndDrawing();
 }
 
