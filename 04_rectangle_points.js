@@ -1,10 +1,23 @@
 const r = require("raylib");
 
+function circlePoints(length, rect) {
+  const points = [];
+
+  for (let i = 0; i < length; i++) {
+    const x = Math.floor(Math.random() * rect.width) + rect.x;
+    const y = Math.floor(Math.random() * rect.height) + rect.y;
+
+    points.push({ x, y });
+  }
+
+  return points;
+}
+
 function setup() {
   const screen = {
     width: 600,
     height: 600,
-    title: "Random x coordinate",
+    title: "Rectangle Points",
     fps: 50,
   }
 
@@ -19,36 +32,36 @@ function setup() {
     r: 255,
     g: 255,
     b: 255,
-    a: 100
+    a: 200
   }
+
+  const length = 100;
+  const points = circlePoints(length, rect);
+  const radius = 4;
 
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(screen.width, screen.height, screen.title);
   r.SetTargetFPS(screen.fps);
 
   return {
-    screen,
-    rect,
-    color
+    color,
+    points,
+    radius,
+    rect
   };
 }
 
 function draw(w) {
-  const radius = 4;
-  const rect = w.rect;
-
   r.BeginDrawing();
 
   r.ClearBackground(r.DARKBLUE);
 
-  r.DrawRectangleLinesEx(rect, 1, r.WHITE);
+  r.DrawRectangleLinesEx(w.rect, 1, r.WHITE);
 
-  for (let i = 0; i < 200; i++) {
-    const x = Math.floor(Math.random() * rect.width) + rect.x;
-    const y = Math.floor(Math.random() * rect.height) + rect.y;
-
-    r.DrawCircle(x, y, radius, w.color);
+  for (const point of w.points) {
+    r.DrawCircleV(point, w.radius, w.color);
   }
+
   r.EndDrawing();
 
 }
