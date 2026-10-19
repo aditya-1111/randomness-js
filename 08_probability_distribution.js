@@ -63,7 +63,11 @@ function createRandom4(width, height, length) {
         Math.floor(Math.random() * height)
         + Math.floor(Math.random() * height)
         + Math.floor(Math.random() * height)
-      ) / 3;
+        + Math.floor(Math.random() * height)
+        + Math.floor(Math.random() * height)
+        + Math.floor(Math.random() * height)
+        + Math.floor(Math.random() * height)
+      ) / 7;
 
     randomArr.push({ x, y });
   }
@@ -79,7 +83,7 @@ function setup() {
     fps: 50,
   }
 
-  const length = 1000;
+  const length = 100;
   const randoms = createRandom(screen.width, screen.height, length);
   const randoms2 = createRandom2(screen.width, screen.height, length);
   const randoms3 = createRandom3(screen.width, screen.height, length);
