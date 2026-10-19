@@ -1,5 +1,18 @@
 const r = require("raylib");
 
+function circlePoints(length, width, height) {
+  const points = [];
+
+  for (let i = 0; i < length; i++) {
+    const x = Math.floor(Math.random() * width);
+    const y = Math.floor(Math.random() * height);
+
+    points.push({ x, y });
+  }
+
+  return points;
+}
+
 function setup() {
   const screen = {
     width: 600,
@@ -15,13 +28,16 @@ function setup() {
     a: 100
   }
 
+  const points = circlePoints(100, screen.width, screen.height);
+
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(screen.width, screen.height, screen.title);
   r.SetTargetFPS(screen.fps);
 
   return {
     screen,
-    color
+    color,
+    points
   };
 }
 
@@ -33,11 +49,8 @@ function draw(w) {
 
   r.ClearBackground(r.DARKBLUE);
 
-  for (let i = 0; i < 100; i++) {
-    const x = Math.floor(Math.random() * sc.width);
-    const y = Math.floor(Math.random() * sc.height);
-
-    r.DrawCircle(x, y, radius, w.color);
+  for (const point of w.points) {
+    r.DrawCircleV(point, radius, w.color);
   }
   r.EndDrawing();
 
