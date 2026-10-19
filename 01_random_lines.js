@@ -1,5 +1,17 @@
 const r = require("raylib");
 
+function randomLines(length, width) {
+  const array = [];
+
+  for (let i = 0; i < length; i++) {
+    const x = Math.floor(Math.random() * width);
+
+    array.push({ x, y: 0 });
+  }
+
+  return array;
+}
+
 function setup() {
   const screen = {
     width: 600,
@@ -8,26 +20,28 @@ function setup() {
     fps: 50,
   }
 
+  const length = 50;
+  const linesPoints = randomLines(length, screen.width);
+
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(screen.width, screen.height, screen.title);
   r.SetTargetFPS(screen.fps);
 
   return {
-    screen
+    screen,
+    linesPoints
   };
 }
 
-function draw() {
+function draw(w) {
   r.BeginDrawing();
   r.ClearBackground(r.DARKBLUE);
 
-  for (let i = 0; i < 50; i++) {
-    const x = Math.floor(Math.random() * r.GetScreenWidth());
-    r.DrawLine(x, 0, x, r.GetScreenHeight(), r.WHITE)
+  for (const pos of w.linesPoints) {
+    r.DrawLineV(pos, { x: pos.x, y: r.GetScreenHeight() }, r.WHITE);
   }
 
   r.EndDrawing();
-
 }
 
 function loop(world) {
