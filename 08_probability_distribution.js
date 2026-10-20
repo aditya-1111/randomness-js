@@ -46,34 +46,6 @@ function createRandom3(width, height, length) {
   return randomArr;
 }
 
-function createRandom4(width, height, length) {
-  const randomArr = [];
-  for (let i = 0; i < length; i++) {
-    const x =
-      (
-        Math.floor(Math.random() * width)
-        // + Math.floor(Math.random() * width)
-        // + Math.floor(Math.random() * width)
-        // + Math.floor(Math.random() * width)
-        // + Math.floor(Math.random() * width)
-        // + Math.floor(Math.random() * width)
-      );
-    const y =
-      (
-        Math.floor(Math.random() * height)
-        + Math.floor(Math.random() * height)
-        + Math.floor(Math.random() * height)
-        + Math.floor(Math.random() * height)
-        + Math.floor(Math.random() * height)
-        + Math.floor(Math.random() * height)
-        + Math.floor(Math.random() * height)
-      ) / 7;
-
-    randomArr.push({ x, y });
-  }
-
-  return randomArr;
-}
 
 function setup() {
   const screen = {
@@ -87,7 +59,6 @@ function setup() {
   const randoms = createRandom(screen.width, screen.height, length);
   const randoms2 = createRandom2(screen.width, screen.height, length);
   const randoms3 = createRandom3(screen.width, screen.height, length);
-  const randoms4 = createRandom4(screen.width, screen.height, length);
 
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(screen.width, screen.height, screen.title);
@@ -97,7 +68,6 @@ function setup() {
     randoms,
     randoms2,
     randoms3,
-    randoms4,
   };
 }
 
@@ -119,12 +89,8 @@ function draw(w) {
   //   r.DrawCircleV(vec, 6, r.YELLOW);
   // }
 
-  // for (const vec of values3) {
-  //   r.DrawCircleV(vec, 6, r.BEIGE);
-  // }
-
-  for (const vec of values4) {
-    r.DrawCircleV(vec, 6, r.ORANGE);
+  for (const vec of values3) {
+    r.DrawCircleV(vec, 6, r.YELLOW);
   }
 
   r.EndDrawing();
