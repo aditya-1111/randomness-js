@@ -41,7 +41,7 @@ function setup() {
 
   const v2 = {
     x: 150,
-    y: 150
+    y: 0
   }
 
   const p2 = {
