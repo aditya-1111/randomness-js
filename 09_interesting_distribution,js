@@ -1,0 +1,66 @@
+const r = require("raylib");
+
+function createPoints(length, width, height) {
+  const points = [];
+
+  for (let i = 0; i < length; i++) {
+    const x = Math.floor(Math.random() * (width / 2)) + (Math.floor(Math.random() * (width / 2)));
+    const y = length;
+
+    points.push({ x, y });
+  }
+
+  return points;
+}
+
+function setup() {
+  const screen = {
+    width: 600,
+    height: 600,
+    title: "Probability Distribution",
+    fps: 50,
+  }
+
+  const length = 50;
+  const points = createPoints(length, screen.width, screen.height);
+
+  console.log(points);
+
+  r.SetTraceLogLevel(r.LOG_NONE);
+  r.InitWindow(screen.width, screen.height, screen.title);
+  r.SetTargetFPS(screen.fps);
+
+  return {
+    points
+  };
+}
+
+function draw(w) {
+  r.BeginDrawing();
+
+  r.ClearBackground(r.WHITE);
+
+  for (const point of w.points) {
+    r.DrawCircleV(point, 2, r.BLACK);
+  }
+
+  r.EndDrawing();
+}
+
+function loop(world) {
+  while (!r.WindowShouldClose()) {
+    draw(world);
+  }
+}
+
+function teardown() {
+  r.CloseWindow();
+}
+
+function main() {
+  const world = setup();
+  loop(world);
+  teardown();
+}
+
+main();
