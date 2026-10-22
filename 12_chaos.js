@@ -79,9 +79,11 @@ function setup() {
 }
 
 function drawTriangle(p1, p2, p3) {
-  r.DrawLineEx(p1, p2, 1, r.WHITE);
-  r.DrawLineEx(p1, p3, 1, r.WHITE);
-  r.DrawLineEx(p2, p3, 1, r.WHITE);
+
+  r.DrawTriangleLines(p1, p2, p3, r.WHITE)
+  // r.DrawLineEx(p1, p2, 1, r.WHITE);
+  // r.DrawLineEx(p1, p3, 1, r.WHITE);
+  // r.DrawLineEx(p2, p3, 1, r.WHITE);
 }
 
 function drawPoints(points) {
