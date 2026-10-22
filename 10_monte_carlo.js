@@ -38,7 +38,7 @@ function setup() {
   const screen = {
     width: 600,
     height: 600,
-    title: "Probability Distribution",
+    title: "Monte Carlo",
     fps: 50,
   }
 
