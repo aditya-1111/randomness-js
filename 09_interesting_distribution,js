@@ -1,16 +1,14 @@
 const r = require("raylib");
 
-function createPoints(length, width, height) {
-  const points = [];
+function createCountArr(length) {
+  const counts = [0, 0, 0, 0, 0];
 
   for (let i = 0; i < length; i++) {
-    const x = Math.floor(Math.random() * (width / 2)) + (Math.floor(Math.random() * (width / 2)));
-    const y = length;
-
-    points.push({ x, y });
+    const val = (Math.random() * 0.5) + (Math.random() * 0.5);
+    counts[Math.floor(val * 5)]++;
   }
 
-  return points;
+  return counts;
 }
 
 function setup() {
@@ -21,17 +19,16 @@ function setup() {
     fps: 50,
   }
 
-  const length = 50;
-  const points = createPoints(length, screen.width, screen.height);
-
-  console.log(points);
+  const length = 1000;
+  const counts = createCountArr(length, screen.width, screen.height);
 
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(screen.width, screen.height, screen.title);
   r.SetTargetFPS(screen.fps);
 
   return {
-    points
+    counts,
+    screen
   };
 }
 
@@ -40,8 +37,11 @@ function draw(w) {
 
   r.ClearBackground(r.WHITE);
 
-  for (const point of w.points) {
-    r.DrawCircleV(point, 2, r.BLACK);
+  for (let idx = 0; idx < w.counts.length; idx++) {
+    const x = idx * (w.screen.width / 5) + 45;
+    const y = w.screen.height - w.counts[idx];
+
+    r.DrawRectangle(x, y, 40, w.screen.height, r.BLACK);
   }
 
   r.EndDrawing();
