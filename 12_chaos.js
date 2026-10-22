@@ -96,7 +96,7 @@ function draw(w) {
   drawTriangle(w.p1, w.p2, w.p3);
   drawPoints(w.pointsArr);
 
-  // r.DrawCircleV(w.point.pos, w.point.radius, w.point.color);
+  r.DrawCircleV(w.point.pos, w.point.radius, w.point.color);
 
   r.EndDrawing();
 }
