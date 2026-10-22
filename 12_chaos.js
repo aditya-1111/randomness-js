@@ -1,20 +1,31 @@
 const r = require("raylib");
 
-function trianglePoints(p1, p2, p3) {
-  const points = [];
-  const minX = Math.min(p1.x, p2.x, p3.x);
-  const maxX = Math.max(p1.x, p2.x, p3.x);
+function chooseCorner(corners) {
+  const idx = Math.floor(Math.random() * corners.length);
 
-  const minY = Math.min(p1.y, p2.y, p3.y);
-  const maxY = Math.max(p1.y, p2.y, p3.y);
+  return corners[idx];
+}
 
-  for (let i = 0; i < 100; i++) {
-    const x = Math.random() * (maxX - minX) + minX;
-    const y = Math.random() * (maxY - minY) + minY;
-    points.push({ x, y });
+function getHalfway(corner, point) {
+  const x = (corner.x + point.x) / 2;
+  const y = (corner.y + point.y) / 2;
+
+  return { x, y };
+}
+
+function trianglePoints(start, length, corners) {
+  const pointsArr = [];
+
+  let point = start;
+  for (let i = 0; i < length; i++) {
+    const corner = chooseCorner(corners);
+    const halfway = getHalfway(corner, point);
+
+    point = halfway;
+    pointsArr.push(halfway);
   }
 
-  return points;
+  return pointsArr;
 }
 
 function setup() {
@@ -26,29 +37,34 @@ function setup() {
   }
 
   const p1 = {
-    x: 100,
+    x: 275,
     y: 200
   }
 
   const p2 = {
-    x: 100,
-    y: 350
+    x: 50,
+    y: 500
   }
 
   const p3 = {
-    x: 400,
-    y: 200,
+    x: 550,
+    y: 500,
   }
+
+  const corners = [p1, p2, p3];
+
   const point = {
     pos: {
       x: 150,
-      y: 150,
+      y: 250,
     },
-    radius: 1,
+    radius: 3,
     color: r.RED,
   }
 
-  const pointsArr = trianglePoints(p1, p2, p3);
+  const length = 10000;
+
+  const pointsArr = trianglePoints(point.pos, length, corners);
 
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(screen.width, screen.height, screen.title);
@@ -56,9 +72,9 @@ function setup() {
 
   return {
     screen,
-    color,
     p1, p2, p3,
-    pointsArr
+    pointsArr,
+    point
   };
 }
 
@@ -68,19 +84,21 @@ function drawTriangle(p1, p2, p3) {
   r.DrawLineEx(p2, p3, 2, r.WHITE);
 }
 
-function drawPoints(points, color) {
+function drawPoints(points) {
   for (const point of points) {
-    r.DrawCircleV(point, 3, color);
+    r.DrawCircleV(point, 1, r.WHITE);
   }
 }
 
 function draw(w) {
   r.BeginDrawing();
 
-  r.ClearBackground(r.DARKBLUE);
+  r.ClearBackground(r.BLACK);
 
   drawTriangle(w.p1, w.p2, w.p3);
-  drawPoints(w.pointsArr, w.color);
+  drawPoints(w.pointsArr);
+
+  // r.DrawCircleV(w.point.pos, w.point.radius, w.point.color);
 
   r.EndDrawing();
 }
