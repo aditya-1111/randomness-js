@@ -1,7 +1,7 @@
 const r = require("raylib");
 
 function chooseCorner(corners) {
-  const idx = Math.floor(Math.random() * corners.length);
+  const idx = Math.floor(Math.random() * (corners.length));
 
   return corners[idx];
 }
@@ -14,7 +14,7 @@ function getHalfway(corner, point) {
 }
 
 function trianglePoints(start, length, corners) {
-  const pointsArr = [];
+  const points = [];
 
   let point = start;
   for (let i = 0; i < length; i++) {
@@ -22,10 +22,10 @@ function trianglePoints(start, length, corners) {
     const halfway = getHalfway(corner, point);
 
     point = halfway;
-    pointsArr.push(halfway);
+    points.push(halfway);
   }
 
-  return pointsArr;
+  return points;
 }
 
 function setup() {
@@ -55,10 +55,10 @@ function setup() {
 
   const point = {
     pos: {
-      x: 150,
+      x: 250,
       y: 250,
     },
-    radius: 3,
+    radius: 1,
     color: r.RED,
   }
 
@@ -79,9 +79,9 @@ function setup() {
 }
 
 function drawTriangle(p1, p2, p3) {
-  r.DrawLineEx(p1, p2, 2, r.WHITE);
-  r.DrawLineEx(p1, p3, 2, r.WHITE);
-  r.DrawLineEx(p2, p3, 2, r.WHITE);
+  r.DrawLineEx(p1, p2, 1, r.WHITE);
+  r.DrawLineEx(p1, p3, 1, r.WHITE);
+  r.DrawLineEx(p2, p3, 1, r.WHITE);
 }
 
 function drawPoints(points) {
