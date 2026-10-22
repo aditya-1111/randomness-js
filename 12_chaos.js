@@ -25,13 +25,6 @@ function setup() {
     fps: 50,
   }
 
-  const color = {
-    r: 254,
-    g: 221,
-    b: 69,
-    a: 200
-  }
-
   const p1 = {
     x: 100,
     y: 200
@@ -45,6 +38,14 @@ function setup() {
   const p3 = {
     x: 400,
     y: 200,
+  }
+  const point = {
+    pos: {
+      x: 150,
+      y: 150,
+    },
+    radius: 1,
+    color: r.RED,
   }
 
   const pointsArr = trianglePoints(p1, p2, p3);
